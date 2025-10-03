@@ -1,0 +1,7 @@
+{
+  "name": "Aura: Your Personal Mental Health Chatbot",
+  "description": "A compassionate conversational AI designed to provide stress management techniques, track your mood, and offer immediate access to emergency support resources. Built with React and powered by Gemini.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
