@@ -1,40 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aura - Mental Health Chatbot</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='url(%23g)'/><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%236366f1'/><stop offset='50%' stop-color='%2306b6d4'/><stop offset='100%' stop-color='%2310b981'/></linearGradient></defs></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Aura — Your Personal Mental Health Companion</title>
+    <meta name="description" content="Aura is an empathetic, Apple HIG-designed mental health companion featuring intelligent AI conversations, real-time mood tracking, interactive guided breathing, and soothing ambient soundscapes." />
+    <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#090d16" media="(prefers-color-scheme: dark)" />
+
+    <!-- Google Fonts: SF Pro alternate (Inter & Plus Jakarta Sans) for pristine typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS with custom Apple design configuration -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      @keyframes pulse-ring {
-        0% {
-          box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
-        }
-        70% {
-          box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
-        }
-        100% {
-          box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: [
+                '-apple-system',
+                'BlinkMacSystemFont',
+                '"Plus Jakarta Sans"',
+                '"SF Pro Display"',
+                '"SF Pro Text"',
+                '"Helvetica Neue"',
+                'Helvetica',
+                'Arial',
+                'sans-serif'
+              ],
+            },
+            colors: {
+              apple: {
+                blue: '#0071e3',
+                indigo: '#5856d6',
+                purple: '#af52de',
+                pink: '#ff2d55',
+                teal: '#30b0c7',
+                mint: '#00c7be',
+                green: '#34c759',
+                yellow: '#ffcc00',
+                orange: '#ff9500',
+                red: '#ff3b30',
+                gray: '#8e8e93',
+                gray2: '#aeaeb2',
+                gray3: '#c7c7cc',
+                gray4: '#d1d1d6',
+                gray5: '#e5e5ea',
+                gray6: '#f2f2f7',
+                darkBg: '#0b0f19',
+                darkCard: '#131b2e',
+                darkBorder: 'rgba(255, 255, 255, 0.08)',
+                lightBorder: 'rgba(0, 0, 0, 0.07)',
+              }
+            },
+            boxShadow: {
+              'apple-sm': '0 2px 8px -2px rgba(0, 0, 0, 0.05), 0 1px 4px -1px rgba(0, 0, 0, 0.03)',
+              'apple-md': '0 8px 24px -4px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04)',
+              'apple-lg': '0 20px 40px -12px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.04)',
+              'apple-glow': '0 0 25px -5px rgba(99, 102, 241, 0.35)',
+              'apple-glow-teal': '0 0 25px -5px rgba(20, 184, 166, 0.35)',
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'slide-up': 'slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'breathe-slow': 'breatheSlow 8s ease-in-out infinite',
+              'wave-bar': 'waveBar 1.2s ease-in-out infinite alternate',
+              'pulse-ring': 'pulseRing 2.2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite',
+              'float': 'float 6s ease-in-out infinite',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideUp: {
+                '0%': { opacity: '0', transform: 'translateY(12px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              breatheSlow: {
+                '0%, 100%': { transform: 'scale(1)', opacity: '0.8' },
+                '50%': { transform: 'scale(1.15)', opacity: '1' },
+              },
+              waveBar: {
+                '0%': { height: '20%' },
+                '100%': { height: '100%' },
+              },
+              pulseRing: {
+                '0%': { boxShadow: '0 0 0 0 rgba(239, 68, 68, 0.6)' },
+                '70%': { boxShadow: '0 0 0 12px rgba(239, 68, 68, 0)' },
+                '100%': { boxShadow: '0 0 0 0 rgba(239, 68, 68, 0)' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-6px)' },
+              }
+            }
+          }
         }
       }
-      .animate-pulse-ring {
-        animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    </script>
+    <style>
+      /* Smooth Apple-grade base & scrollbars */
+      html, body {
+        font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", "SF Pro Display", "SF Pro Text", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+
+      /* Custom Cupertino ultra-thin scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(150, 150, 150, 0.25);
+        border-radius: 9999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(150, 150, 150, 0.45);
+      }
+
+      /* Apple Liquid Glass utilities */
+      .apple-glass {
+        background: rgba(255, 255, 255, 0.72);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+      }
+      .dark .apple-glass {
+        background: rgba(19, 27, 46, 0.72);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .apple-glass-card {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+      }
+      .dark .apple-glass-card {
+        background: rgba(25, 33, 52, 0.55);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+      }
+
+      /* Subtle gradient mesh background */
+      .aura-mesh-bg {
+        background-color: #f8fafc;
+        background-image: 
+          radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+          radial-gradient(at 100% 0%, rgba(20, 184, 166, 0.08) 0px, transparent 50%),
+          radial-gradient(at 50% 100%, rgba(244, 114, 182, 0.05) 0px, transparent 50%);
+      }
+      .dark .aura-mesh-bg {
+        background-color: #080d1a;
+        background-image: 
+          radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+          radial-gradient(at 100% 0%, rgba(20, 184, 166, 0.12) 0px, transparent 50%),
+          radial-gradient(at 50% 100%, rgba(168, 85, 247, 0.08) 0px, transparent 50%);
       }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.22.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
-  }
-}
-</script>
-</head>
-  <body class="bg-slate-100 dark:bg-slate-900">
-    <div id="root"></div>
+  </head>
+  <body class="h-full aura-mesh-bg text-slate-800 dark:text-slate-100 antialiased overflow-hidden selection:bg-indigo-500/20 selection:text-indigo-600 dark:selection:text-indigo-300">
+    <div id="root" class="h-full w-full"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
