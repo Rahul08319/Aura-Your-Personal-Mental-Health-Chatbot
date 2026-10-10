@@ -81,7 +81,12 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
         {/* Message Stream */}
         <div className="space-y-1">
           {messages.map((message) => (
-            <MessageBubble key={message.id} message={message} />
+            <MessageBubble
+              key={message.id}
+              message={message}
+              onOpenBreathing={onOpenBreathing}
+              onSelectAction={onSelectPrompt}
+            />
           ))}
 
           {/* Apple Animated Typing Indicator */}
